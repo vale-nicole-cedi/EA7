@@ -1,20 +1,49 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Blank
+  Lista de tareas
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content padding>
+  <input #nameInput type = "text" placeholder="Nombre"/>
+  <input #dateInput type = "date"/>
+  <input #accionesInput type = "text" placeholder="Tareas a realizar"/>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <button
+  (click)="addItem(nameInput.value, dateInput.value, accionesInput.value); nameInput.value = ''; dateInput.value= ''; accionesInput.value=''">
+  Agregar
+  </button>
+
+  <table border="1" style="margin-top: 20px; width: 100%; text-align: left;"> <!--Crea una tabla-->
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nombre</th>
+        <th>Fecha</th>
+        <th>Completado</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let item of items">
+        <td>{{ item.id }}</td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.date }}</td>
+        <td>
+          <input type="checkbox" [checked]="item.completed" (change)="toggleCompleted(item.id)" />
+        </td>
+        <td>{{ item.acciones }}</td>
+        <td>
+          <button (click)="removeItem(item.id)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+    
+
+  </table>
+
+  
 </ion-content>

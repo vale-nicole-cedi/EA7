@@ -10,4 +10,8 @@ export const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full',
   },
+  {
+    path: 'add-edit-item',
+    loadComponent: () => import('./add-edit-item/add-edit-item.page').then( m => m.AddEditItemPage)
+  },
 ];
